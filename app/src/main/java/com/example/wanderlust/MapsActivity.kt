@@ -1,11 +1,15 @@
 package com.example.wanderlust
 
+import android.Manifest
 import android.content.Context
+import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -75,7 +79,15 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         }
 
+        //if permission not granted
+        if(ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION)!=PackageManager.PERMISSION_GRANTED){
+            //ask for an array of permissions,in our case only 1 permission of fine location
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),1)
 
+        }else{
+            //when we already have a permission
+            
+        }
 
     }
 }
