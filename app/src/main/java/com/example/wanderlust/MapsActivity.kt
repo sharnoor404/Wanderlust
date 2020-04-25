@@ -1,5 +1,9 @@
 package com.example.wanderlust
 
+import android.content.Context
+import android.location.Location
+import android.location.LocationListener
+import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
@@ -13,6 +17,9 @@ import com.google.android.gms.maps.model.MarkerOptions
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
+    //step 3(a) the below variable are required to access user's current location
+    var locationManager:LocationManager?=null
+    var locationListener:LocationListener?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,9 +42,31 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
-        // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        //step 3(b): code to fetch user's current location
+        locationManager=getSystemService(Context.LOCATION_SERVICE) as LocationManager
+
+        locationListener=object: LocationListener{
+            override fun onLocationChanged(location: Location?) {
+                
+
+
+            }
+
+            override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {
+
+            }
+
+            override fun onProviderEnabled(provider: String?) {
+
+            }
+
+            override fun onProviderDisabled(provider: String?) {
+
+            }
+
+        }
+
+
+
     }
 }

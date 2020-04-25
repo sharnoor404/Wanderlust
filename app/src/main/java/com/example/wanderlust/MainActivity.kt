@@ -9,6 +9,7 @@ import android.view.MenuItem
 class MainActivity : AppCompatActivity() {
 
 //step 1-menu added(to add new places so as to save them to our database)
+    //prior to this generate a google maps API from the link provided in the Maps Activity
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val menuInflater=getMenuInflater()
@@ -21,6 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
+        //prior to this generate a google maps API from the link provided in the Maps Activity and check for fine location permission within manifest file
         //step 2-when Add Place option of menu is clicked the user is navigated to a new intent(Maps Activity)
         //!! sign represents that item value surely has some value
         
