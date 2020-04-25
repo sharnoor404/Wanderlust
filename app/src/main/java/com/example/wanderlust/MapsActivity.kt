@@ -86,8 +86,26 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         }else{
             //when we already have a permission
-            
+
         }
 
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+
+        if(grantResults.size>0){//the grantResult variable has some value
+            //and that value is permission granted
+            if(ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION)==PackageManager.PERMISSION_GRANTED){
+                //when permission has been granted
+                locationManager!!.requestLocationUpdates(LocationManager.GPS_PROVIDER,2,2f,locationListener)
+                //this code will request for user's location after every 2 minutes with an accuracy of 2f distance.
+                //though it is better in term of accuracy if we use 0,0f but that will consume lot of user battery
+            }
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 }
