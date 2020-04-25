@@ -90,6 +90,25 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             //when we already have a permission
             //same code as on requestPermission when our request has been granted
             locationManager!!.requestLocationUpdates(LocationManager.GPS_PROVIDER,2,2f,locationListener)
+
+            //step 7-
+
+            val intent=intent
+            val info=intent.getStringExtra("info")
+
+
+            //when a user add's up a new location(i.e info=new)
+            if(info.equals("new")){
+
+                mMap.clear()//clear any existing pointer on map
+                val lastLocation=locationManager!!.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+                //fetch user's last known location so that on clicking on add place the map opens on the last location of user
+                //which will be the nearest to him/her
+                var lastUserLocation=LatLng(lastLocation.latitude,lastLocation.longitude)
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(lastUserLocation,14f))
+            }else{
+
+            }
         }
 
     }
