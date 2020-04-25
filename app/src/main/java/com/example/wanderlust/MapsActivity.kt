@@ -47,7 +47,16 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         locationListener=object: LocationListener{
             override fun onLocationChanged(location: Location?) {
-                
+                //location variable here stores users current location
+                if(location!=null){
+                    var userLocation=LatLng(location!!.latitude,location!!.longitude)
+                    //we extract user's latitude and longitude from location variable as 'userLocation'
+                    mMap.addMarker(MarkerOptions().position(userLocation).title("Your Location"))
+                    //the above adds a marker at this location
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation,17f))
+                    //this line of code moves camera to user's current location by zooming in by a factor of 17f (f=float)
+
+                }
 
 
             }
