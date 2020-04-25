@@ -28,6 +28,9 @@ class MainActivity : AppCompatActivity() {
         
         if(item!!.itemId==R.id.add_place){
             val intent= Intent(applicationContext,MapsActivity::class.java)
+            //the below line has been added to mark a difference between the activities that show up when a user adds a new location
+            //and when the user opens up an old location from the listView
+            intent.putExtra("info","new")
             startActivity(intent)
 
         }

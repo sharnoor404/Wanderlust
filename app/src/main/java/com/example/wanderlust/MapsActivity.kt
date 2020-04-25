@@ -49,6 +49,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         //step 3(b): code to fetch user's current location
         locationManager=getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
+        //displaying user details
         locationListener=object: LocationListener{
             override fun onLocationChanged(location: Location?) {
                 //location variable here stores users current location
@@ -79,18 +80,21 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         }
 
+        //step 4(a)
         //if permission not granted
         if(ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION)!=PackageManager.PERMISSION_GRANTED){
             //ask for an array of permissions,in our case only 1 permission of fine location
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),1)
 
-        }else{
+        }else{//step 6
             //when we already have a permission
-
+            //same code as on requestPermission when our request has been granted
+            locationManager!!.requestLocationUpdates(LocationManager.GPS_PROVIDER,2,2f,locationListener)
         }
 
     }
 
+    //step 5
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
