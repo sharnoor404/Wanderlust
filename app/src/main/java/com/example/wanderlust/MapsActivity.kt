@@ -159,6 +159,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                e.printStackTrace()
             }
             mMap.addMarker(MarkerOptions().position(p0!!).title(address))
+
+            namesArray.add(address)
+            locationArray.add(p0)
+
             Toast.makeText(applicationContext,"New Place Created",Toast.LENGTH_LONG).show()
 
             //creating database to store places added to map on long click

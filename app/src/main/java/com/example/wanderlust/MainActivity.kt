@@ -10,12 +10,13 @@ import android.widget.ArrayAdapter
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+//making arrays global
+var namesArray=ArrayList<String>()
+//array to store names of location
+var locationArray=ArrayList<LatLng>()
+//array to store location
 
-    var namesArray=ArrayList<String>()
-    //array to store names of location
-    var locationArray=ArrayList<LatLng>()
-    //array to store location
+class MainActivity : AppCompatActivity() {
 
 //step 1-menu added(to add new places so as to save them to our database)
     //prior to this generate a google maps API from the link provided in the Maps Activity
@@ -46,10 +47,9 @@ class MainActivity : AppCompatActivity() {
 
         return super.onOptionsItemSelected(item)
     }
+//on resume calls the function additionally when we resume an activity along with its call on create
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+    override fun onResume() {
 
         //the below open up the existing database 'Places' and adds them to the list view arrays
 
@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
             val latitudeIndex=cursor.getColumnIndex("latitude")
             val longitudeIndex=cursor.getColumnIndex("longitude")
 
-           cursor.moveToFirst()
+            cursor.moveToFirst()
 
             namesArray.clear()
             locationArray.clear()
@@ -90,7 +90,7 @@ class MainActivity : AppCompatActivity() {
         val arrayAdapter=ArrayAdapter(this,android.R.layout.simple_list_item_1,namesArray)
         listView.adapter=arrayAdapter
 
-            //code for actions to occur when clicking on list Item
+        //code for actions to occur when clicking on list Item
 
         listView.setOnItemClickListener { parent, view, position, id ->
             val intent=Intent(applicationContext,MapsActivity::class.java)
@@ -102,6 +102,12 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+        super.onResume()
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
     }
 }
