@@ -49,6 +49,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //the below open up the existing database 'Places' and adds them to the list view arrays
+
         try{
             val database=openOrCreateDatabase("Places", Context.MODE_PRIVATE,null)
             val cursor=database.rawQuery("SELECT * FROM places",null)
@@ -57,7 +59,16 @@ class MainActivity : AppCompatActivity() {
             val latitudeIndex=cursor.getColumnIndex("latitude")
             val longitudeIndex=cursor.getColumnIndex("longitude")
 
-           
+           cursor.moveToFirst()
+
+            while(cursor!=null){
+                val nameFromDatabase=cursor.getString(nameIndex)
+                val latitudeFromDatabase=cursor.getString(latitudeIndex)
+                val longitudeFromDatabase=cursor.getString(longitudeIndex)
+
+                
+
+            }
         }catch(e:Exception){
             e.printStackTrace()
 
