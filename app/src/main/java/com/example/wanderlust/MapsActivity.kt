@@ -152,6 +152,19 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             mMap.addMarker(MarkerOptions().position(p0!!).title(address))
             Toast.makeText(applicationContext,"New Place Created",Toast.LENGTH_LONG).show()
 
+            try{
+
+                val latitude=p0.latitude.toString()
+                val longitude=p0.longitude.toString()
+
+                val database=openOrCreateDatabase("Places",Context.MODE_PRIVATE,null)
+                database.execSQL("CREATE TABLE IF NOT EXISTS places(name VARCHAR,latitude VARCHAR,longitude VARCHAR)")
+
+            }catch(e:Exception){
+                e.printStackTrace()
+
+            }
+
 
         }
 
