@@ -90,6 +90,17 @@ class MainActivity : AppCompatActivity() {
         val arrayAdapter=ArrayAdapter(this,android.R.layout.simple_list_item_1,namesArray)
         listView.adapter=arrayAdapter
 
+            //code for actions to occur when clicking on list Item
+
+        listView.setOnItemClickListener { parent, view, position, id ->
+            val intent=Intent(applicationContext,MapsActivity::class.java)
+            intent.putExtra("info","old")//since it has been taken up from database
+            intent.putExtra("name",namesArray[position])
+            intent.putExtra("latitude",locationArray[position].latitude)//since it has been taken up from database
+            intent.putExtra("longitude",locationArray[position].longitude)
+            startActivity(intent)
+        }
+
 
 
     }
