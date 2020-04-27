@@ -10,6 +10,7 @@ import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 
@@ -24,9 +25,12 @@ import java.util.*
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
+
+
     //step 3(a) the below variable are required to access user's current location
     var locationManager:LocationManager?=null
     var locationListener:LocationListener?=null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +52,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
      */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
+
+        mMap.setOnMapLongClickListener(myListener)//if this is not enabled then nothing would happen even if we make a long click on map
+
 
         //step 3(b): code to fetch user's current location
         locationManager=getSystemService(Context.LOCATION_SERVICE) as LocationManager
@@ -142,6 +149,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             }catch(e:Exception){
                e.printStackTrace()
             }
+            mMap.addMarker(MarkerOptions().position(p0!!).title(address))
+            Toast.makeText(applicationContext,"New Place Created",Toast.LENGTH_LONG).show()
+
 
         }
 
