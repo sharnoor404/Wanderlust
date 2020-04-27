@@ -61,12 +61,23 @@ class MainActivity : AppCompatActivity() {
 
            cursor.moveToFirst()
 
+            namesArray.clear()
+            locationArray.clear()
+
             while(cursor!=null){
                 val nameFromDatabase=cursor.getString(nameIndex)
                 val latitudeFromDatabase=cursor.getString(latitudeIndex)
                 val longitudeFromDatabase=cursor.getString(longitudeIndex)
 
-                
+                namesArray.add(nameFromDatabase)
+
+                val latitudeCoordinate=latitudeFromDatabase.toDouble()
+                val longitudeCoordinate=longitudeFromDatabase.toDouble()
+
+                val location=LatLng(latitudeCoordinate,longitudeCoordinate)
+
+                locationArray.add(location)
+                cursor.moveToNext()
 
             }
         }catch(e:Exception){
