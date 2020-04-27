@@ -117,6 +117,15 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 var lastUserLocation=LatLng(lastLocation.latitude,lastLocation.longitude)
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(lastUserLocation,14f))
             }else{
+                mMap.clear()
+                //get double extra because the contents of location array are composed of 'double' type values
+                val latitude=intent.getDoubleExtra("latitude",0.0)
+                val longitude=intent.getDoubleExtra("longitude",0.0)
+                val name=intent.getStringExtra("name")
+                val location=LatLng(latitude,longitude)
+                mMap.addMarker(MarkerOptions().position(location).title(name))
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location,17f))
+
 
             }
         }
