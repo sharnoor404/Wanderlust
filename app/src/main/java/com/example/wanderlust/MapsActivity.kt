@@ -3,11 +3,13 @@ package com.example.wanderlust
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
+import android.location.Geocoder
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 
@@ -17,6 +19,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import java.util.*
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -113,6 +116,24 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     }
 
+    //adding marker to a place on long click
+    val myListener = object:GoogleMap.OnMapLongClickListener{
+        override fun onMapLongClick(p0: LatLng?) {
+           val geocoder= Geocoder(applicationContext, Locale.getDefault())
+            var address=""
+            try{
+
+
+
+            }catch(e:Exception){
+               e.printStackTrace()
+            }
+
+        }
+
+
+    }
+    
     //step 5
     override fun onRequestPermissionsResult(
         requestCode: Int,
