@@ -1,12 +1,19 @@
 package com.example.wanderlust
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import com.google.android.gms.maps.model.LatLng
 
 class MainActivity : AppCompatActivity() {
+
+    var namesArray=ArrayList<String>()
+    //array to store names of location
+    var locationArray=ArrayList<LatLng>()
+    //array to store location
 
 //step 1-menu added(to add new places so as to save them to our database)
     //prior to this generate a google maps API from the link provided in the Maps Activity
@@ -41,5 +48,20 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        try{
+            val database=openOrCreateDatabase("Places", Context.MODE_PRIVATE,null)
+            val cursor=database.rawQuery("SELECT * FROM places",null)
+
+            val nameIndex=cursor.getColumnIndex("name")
+            val latitudeIndex=cursor.getColumnIndex("latitude")
+            val longitudeIndex=cursor.getColumnIndex("longitude")
+
+           
+        }catch(e:Exception){
+            e.printStackTrace()
+
+        }
+
     }
 }
