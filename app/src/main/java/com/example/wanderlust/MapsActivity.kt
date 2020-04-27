@@ -122,7 +122,21 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
            val geocoder= Geocoder(applicationContext, Locale.getDefault())
             var address=""
             try{
+                //setting the onclick address to thoroughfare and sub-thoroughfare
+                    val addressList=geocoder.getFromLocation(p0!!.latitude,p0!!.longitude,1)
+                if(addressList!=null && addressList.size>0){
 
+                    if(addressList[0].thoroughfare!=null){
+                        address+=addressList[0].thoroughfare
+
+                        if(addressList[0].subThoroughfare!=null){
+                            address+=addressList[0].subThoroughfare
+                        }
+                    }
+
+                }else{
+                    address="New Place"
+                }
 
 
             }catch(e:Exception){
