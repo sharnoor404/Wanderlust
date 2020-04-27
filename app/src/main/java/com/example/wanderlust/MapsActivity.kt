@@ -152,13 +152,24 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             mMap.addMarker(MarkerOptions().position(p0!!).title(address))
             Toast.makeText(applicationContext,"New Place Created",Toast.LENGTH_LONG).show()
 
+            //creating database to store places added to map on long click
+
             try{
 
                 val latitude=p0.latitude.toString()
                 val longitude=p0.longitude.toString()
 
                 val database=openOrCreateDatabase("Places",Context.MODE_PRIVATE,null)
-                database.execSQL("CREATE TABLE IF NOT EXISTS places(name VARCHAR,latitude VARCHAR,longitude VARCHAR)")
+                database.execSQL("CREATE TABLE IF NOT EXISTS places (name VARCHAR,latitude VARCHAR,longitude VARCHAR)")
+
+                val toCompile="INSERT INTO places (name, latitude, longitude) VALUES (?,?,?)"
+                val sqlLiteStatement=database.compileStatement(toCompile)
+
+                sqlLiteStatement.bindString(1,address)
+                sqlLiteStatement.bindString(2,latitude)
+                sqlLiteStatement.bindString(3,longitude)
+
+                sqlLiteStatement.execute()
 
             }catch(e:Exception){
                 e.printStackTrace()
