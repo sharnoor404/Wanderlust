@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ArrayAdapter
 import com.google.android.gms.maps.model.LatLng
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -82,8 +84,13 @@ class MainActivity : AppCompatActivity() {
             }
         }catch(e:Exception){
             e.printStackTrace()
-
         }
+
+        //connecting array to adapter and adapter to listView makes the saved locations visible to the user.
+        val arrayAdapter=ArrayAdapter(this,android.R.layout.simple_list_item_1,namesArray)
+        listView.adapter=arrayAdapter
+
+
 
     }
 }
